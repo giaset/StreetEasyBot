@@ -14,10 +14,8 @@ setInterval(function() {
 }, 60 * 1000)
 
 function fetch_listings() {
-	console.log('Fetching new listings...')
 	request(url, function (error, response, body) {
 		var listings = JSON.parse(body).listings.object
-		console.log('All done! There are '+listings.length+' listings total.')
 
 		// sort by decreasing order of id (i.e. newest listing first)
 		listings.sort(decreasing_ids)
@@ -49,9 +47,7 @@ function post_listing_to_slack(listing) {
 	var message = 'Hey @giaset, I found a new listing on StreetEasy for you: '+listing_url
 	var body = {json: {text: message, 'link_names': 1}}
 
-	request.post(webhook_url, body, function (error, response, body) {
-
-	})
+	request.post(webhook_url, body, function (error, response, body) {})
 }
 
 function decreasing_ids(a, b) {
